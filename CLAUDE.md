@@ -37,6 +37,10 @@ This is a take-home exercise (Neighbourhood Noticeboard — see `docs/PLAN.md` a
 
 Tests are colocated with the code they cover (e.g. `normalize.test.ts` beside `normalize.ts`), not in a separate `tests/` tree.
 
+### Styling
+
+Tailwind CSS v4 (`@tailwindcss/vite`). Theme tokens (colors, fonts) are defined once in `src/app.css` under `@theme` — use those (`bg-accent`, `text-paper`, `font-marker`, etc.), don't hardcode hex values or introduce new ad-hoc colors. Layout/spacing is inline utility classes in markup; only reach for a new `@utility` class in `app.css` if a pattern (with pseudo-elements or many repeated classes) is used across multiple components, following `pin-card`/`board-frame`/`paper-form` as the existing examples.
+
 ### Data model and trust & safety
 
 Full schema and rationale live in `docs/DECISIONS.md` ("Data model", "Trust & safety"). Key point for working in this codebase: `Notice.status` (`visible` | `pending_review` | `hidden`) is set once by `evaluateTrustAndSafety()` inside `createNotice()`/`createReply()` — never set directly by callers. Flags also write an append-only `TrustEvent` and adjust `User.trustScore`; don't mutate `trustScore` directly elsewhere.
