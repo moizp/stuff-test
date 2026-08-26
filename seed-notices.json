@@ -1,0 +1,151 @@
+[
+  {
+    "id": 1001,
+    "type": "OFFER",
+    "title": "Free firewood, you collect",
+    "body": "Had a tree come down. Heaps of split pine, first in first served. Mt Eden end.",
+    "author": "Raewyn T",
+    "neighbourhood": "Mt Eden",
+    "verified": true,
+    "created": "2026-06-19T08:14:00Z"
+  },
+  {
+    "id": 1002,
+    "type": "request",
+    "subject": "Borrow a ladder?",
+    "text": "Anyone have a tall ladder I could borrow for the weekend? Need to clear the gutters before the next storm.",
+    "author": "James",
+    "suburb": "Mt Eden",
+    "verified": true,
+    "created": "18/06/2026"
+  },
+  {
+    "id": 1003,
+    "type": "Event",
+    "title": "Street BBQ this Saturday",
+    "body": "Bring a plate, 12pm at the reserve. Kids welcome.",
+    "author": null,
+    "neighbourhood": "Grey Lynn",
+    "verified": true,
+    "created": 1750118400
+  },
+  {
+    "id": 1004,
+    "type": "alert",
+    "title": "Car break-ins on Francis St",
+    "body": "Two cars broken into overnight. Lock up and don't leave anything visible.",
+    "author": "Tom H",
+    "neighbourhood": "Grey Lynn",
+    "verified": true,
+    "created": "2026-06-22T22:03:00Z"
+  },
+  {
+    "id": 1005,
+    "type": null,
+    "title": "lost cat - tabby, answers to Miso",
+    "body": "Missing since Tuesday near the shops. Microchipped. Please call.",
+    "author": "Priya",
+    "neighbourhood": "Mt Eden",
+    "verified": true,
+    "created": "2026-06-17"
+  },
+  {
+    "id": 1006,
+    "type": "offer",
+    "title": "MAKE $$$ FROM HOME - GUARANTEED INCOME",
+    "body": "Local mums earning 4k/week!! DM me or whatsapp +00 000 000 to start TODAY. Limited spots!!!",
+    "author": "wealth_freedom_88",
+    "neighbourhood": "Grey Lynn",
+    "verified": false,
+    "created": "2026-06-23T03:41:00Z"
+  },
+  {
+    "id": 1007,
+    "type": "request",
+    "title": "Recommendations for a plumber",
+    "body": "Reliable, reasonably priced plumber near Sandringham? Leaking tap is driving me mad.",
+    "author": "Lena",
+    "neighbourhood": "Sandringham",
+    "verified": false,
+    "created": "2026-06-20T11:27:00Z"
+  },
+  {
+    "id": 1008,
+    "type": "OFFER",
+    "title": "Free firewood, you collect",
+    "body": "Had a tree come down. Heaps of split pine, first in first served. Mt Eden end.",
+    "author": "Raewyn T",
+    "neighbourhood": "Mt Eden",
+    "verified": true,
+    "created": "2026-06-19T08:15:12Z"
+  },
+  {
+    "id": 1009,
+    "type": "event",
+    "title": "Community garden working bee",
+    "body": "Sunday 9am. Bring gloves. Morning tea provided.",
+    "author": "Sandringham Garden Collective",
+    "neighbourhood": "sandringham",
+    "verified": true,
+    "created": "2026-06-21T19:00:00Z"
+  },
+  {
+    "id": 1010,
+    "type": "alert",
+    "title": "you people are pathetic",
+    "body": "this whole neighbourhood is full of [redacted] and i hope you all rot. watch your backs.",
+    "author": "anon",
+    "neighbourhood": "Grey Lynn",
+    "verified": false,
+    "created": "2026-06-24T01:12:00Z"
+  },
+  {
+    "id": 1011,
+    "type": "request",
+    "title": "Babysitter recommendations",
+    "body": "After-school care two days a week for a 7yo. Any trusted names?",
+    "author": "Mere",
+    "neighbourhood": "Mt Eden",
+    "verified": true,
+    "created": ""
+  },
+  {
+    "id": 1012,
+    "type": "offer",
+    "title": "Moving boxes - free",
+    "body": "About 20 boxes plus bubble wrap. Just moved in. Pick up from Grey Lynn.",
+    "author": "Dan",
+    "neighbourhood": "Grey Lynn",
+    "verified": false,
+    "created": "2026-06-22"
+  },
+  {
+    "id": 1013,
+    "type": "OFFER",
+    "title": "GUARANTEED INCOME work from home!!!",
+    "body": "Local mums earning 4k/week!! DM me to start TODAY!! Limited spots!!!",
+    "author": "wealth_freedom_88",
+    "neighbourhood": "Mt Eden",
+    "verified": false,
+    "created": "2026-06-23T03:48:00Z"
+  },
+  {
+    "id": 1014,
+    "title": "Anyone else lose power last night?",
+    "body": "Out from about 11pm in Sandringham. Back now. Just checking it wasn't only us.",
+    "author": "Geoff",
+    "neighbourhood": "Sandringham",
+    "verified": true,
+    "created": "2026-06-25T07:50:00Z"
+  },
+  {
+    "id": 1015,
+    "type": "event",
+    "title": "Repair café - bring broken stuff",
+    "body": "Volunteers will help fix small appliances, bikes, clothing. Last Sunday of the month, library hall.",
+    "author": "  ",
+    "neighbourhood": "Mt Eden",
+    "verified": true,
+    "created": "2026-06-26T10:00:00Z"
+  }
+]
