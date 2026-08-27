@@ -1,20 +1,29 @@
 # Neighbourhood Noticeboard
 
-Take-home exercise: a lightweight community noticeboard — post notices, reply, import legacy data, and apply basic trust & safety rules.
+A lightweight community noticeboard — residents post notices, reply to each other, and a legacy data import plus a trust & safety pipeline handle the messier real-world parts. Built with SvelteKit, TypeScript, and Tailwind CSS.
 
-Live demo: _TBD (see Deploy below)_
+**Live demo: [neighbourhood-noticeboard.onrender.com](https://neighbourhood-noticeboard.onrender.com)** (runs on Render's free tier, so the first load after a period of inactivity can take few seconds to wake up.)
+
+![Neighbourhood Noticeboard](docs/Noticeboard-screenshot.png)
+
+## Deliverables
+
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — architecture, key decisions, trust & safety reasoning, scope cuts, how AI was used, what's next.
+- [`docs/SUMMARY.md`](docs/SUMMARY.md) — non-technical summary of what was built and why it matters.
+- [`docs/SCENARIOS.md`](docs/SCENARIOS.md) — written answers to the scenario questions.
+- [`docs/PLAN.md`](docs/PLAN.md) — live progress checklist.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node 20+
-- pnpm 10.x (`corepack enable` will pick up the right version automatically)
+- [Node](https://nodejs.org/) 20+
+- [pnpm](https://pnpm.io/) 10.x
 
 ### Run locally
 
 ```sh
-git clone <repo-url>
+git clone https://github.com/moizp/stuff-test.git
 cd stuff-test
 pnpm install
 pnpm dev
@@ -41,34 +50,23 @@ Deployed to [Render](https://render.com)'s free tier as a single Node process (`
 
 ## What's built
 
-Full progress lives in [`docs/PLAN.md`](docs/PLAN.md) (live checklist). In short: domain model, repository, legacy import, and trust & safety pipeline are built and tested; notice/reply routes and UI are the main piece still in progress.
+All must-do features are built and tested: legacy import, listing/creating/replying to notices per neighbourhood, and the trust & safety pipeline, plus a full UI (card customisation, popup detail view, accessibility pass) and a live deployment. Full progress lives in [`docs/PLAN.md`](docs/PLAN.md).
 
 ## Folder structure
 
 SvelteKit enforces the frontend/backend split structurally, not just by convention — the build throws if client code imports anything under `server/`. That split maps directly onto the architecture in `DECISIONS.md`:
 
 ```
+docs/                # DECISIONS.md, SUMMARY.md, SCENARIOS.md, PLAN.md
 src/
-  routes/          # frontend — pages + API endpoints (+page.svelte, +server.ts)
+  routes/            # frontend — pages + API endpoints (+page.svelte, +server.ts)
   lib/
-    server/        # backend-only, never bundled for the client
-      services/    # business logic (createNotice, trust & safety, etc.)
-      repository/  # data access, swappable storage interface
-      import/       # legacy seed-notices.json → createNotice() pipeline
-    shared/        # types used by both frontend and backend
-    components/    # frontend UI (card, create form, reply thread) — not yet built
+    server/          # backend-only, never bundled for the client
+      services/      # business logic (createNotice, trust & safety, etc.)
+      repository/    # data access, swappable storage interface
+      import/        # legacy seed-notices.json → createNotice() pipeline
+    shared/          # types used by both frontend and backend
+    components/      # frontend UI (notice card, detail dialog, create form, viewer badge)
 ```
 
 Tests are colocated with the code they cover (e.g. `normalize.test.ts` next to `normalize.ts`), not held in a separate `tests/` tree — keeps a unit and its test moving together under one architectural boundary.
-
-## Architecture & decisions
-
-See [`docs/DECISIONS.md`](docs/DECISIONS.md) for the full rationale — stack choice, data model, trust & safety rules, legacy import approach, deliberate scope cuts, and what we'd do with more time.
-
-## Scenario answers
-
-See [`docs/SCENARIOS.md`](docs/SCENARIOS.md).
-
-## Non-technical summary
-
-See [`docs/SUMMARY.md`](docs/SUMMARY.md).
