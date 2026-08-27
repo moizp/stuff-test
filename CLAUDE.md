@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Be succinct and direct. No preamble, no restating the request, no summarizing what was just done unless asked.
 
+Use New Zealand English spelling and vocabulary in all written output — docs, code comments, commit messages, and UI copy (e.g. "neighbourhood", "colour", "organise", "licence" as a noun).
+
 ## Tooling
 
 - Use the `svelte` MCP server (`mcp__svelte__*`) when writing or fixing Svelte code — `svelte-autofixer` in particular before considering a component done.
@@ -19,6 +21,9 @@ Be succinct and direct. No preamble, no restating the request, no summarizing wh
 - `pnpm test` — run the full vitest suite (`vitest run`)
 - `pnpm test -- <pattern>` — run a subset, e.g. `pnpm test -- trust-safety`
 - `pnpm check` — type-check via `svelte-kit sync && svelte-check`; run this after any change, it catches most issues cheaply
+
+- `pnpm format` — write formatting via Prettier (also sorts Tailwind classes)
+- `pnpm format:check` — check formatting without writing
 
 There is no separate lint command configured.
 
@@ -37,19 +42,32 @@ This is a take-home exercise (Neighbourhood Noticeboard — see `docs/PLAN.md` a
 
 Tests are colocated with the code they cover (e.g. `normalize.test.ts` beside `normalize.ts`), not in a separate `tests/` tree.
 
+### UI objective
+
+Posting a notice should feel as easy as putting up a sign on a noticeboard — simple and seamless. Weigh new UI work (fields, steps, confirmations) against that: if it adds friction without a clear payoff, it's probably the wrong call for this app.
+
 ### Styling
 
-Tailwind CSS v4 (`@tailwindcss/vite`). Theme tokens (colors, fonts) are defined once in `src/app.css` under `@theme` — use those (`bg-accent`, `text-paper`, `font-marker`, etc.), don't hardcode hex values or introduce new ad-hoc colors. Layout/spacing is inline utility classes in markup; only reach for a new `@utility` class in `app.css` if a pattern (with pseudo-elements or many repeated classes) is used across multiple components, following `pin-card`/`board-frame`/`paper-form` as the existing examples.
+Tailwind CSS v4 (`@tailwindcss/vite`). Theme tokens (colours, fonts) are defined once in `src/app.css` under `@theme` — use those (`bg-accent`, `text-paper`, `font-marker`, etc.), don't hardcode hex values or introduce new ad-hoc colours; if you do add a colour token, check its contrast against whatever text/background it pairs with (see "Accessibility" below) before committing to it. Layout/spacing is inline utility classes in markup; only reach for a new `@utility` class in `app.css` if a pattern (with pseudo-elements or many repeated classes) is used across multiple components, following `pin-card`/`page-frame`/`paper-form` as the existing examples. Formatting (including Tailwind class order) is via Prettier — `pnpm format`, or on-save in VS Code (`.vscode/settings.json`); don't hand-order class strings.
+
+### Accessibility
+
+- Any expand/collapse toggle (the notice detail view, the create-notice form) should be a real disclosure widget: `aria-expanded` on the button reflecting state, `aria-controls` pointing at the region's `id` — see `NoticeCard.svelte` / `src/routes/board/[name]/+page.svelte` for the pattern.
+- Don't hand-roll focus styling — the global `:focus-visible` rule in `app.css` already covers every interactive element consistently.
+- A content image (e.g. `cardImageUrl`) needs real `alt` text, not `alt=""` — only genuinely decorative images get an empty `alt`.
+- Heading levels must not skip (no `<h1>` straight to `<h3>`) — check what heading level is already in scope on the page before adding one.
 
 ### Data model and trust & safety
 
 Full schema and rationale live in `docs/DECISIONS.md` ("Data model", "Trust & safety"). Key point for working in this codebase: `Notice.status` (`visible` | `pending_review` | `hidden`) is set once by `evaluateTrustAndSafety()` inside `createNotice()`/`createReply()` — never set directly by callers. Flags also write an append-only `TrustEvent` and adjust `User.trustScore`; don't mutate `trustScore` directly elsewhere.
 
-Only public noticeboards have UI/routes built. `Circle` and private-board visibility are modeled in the schema and repository but have no UI — see `docs/DECISIONS.md` ("Scope cuts") before building on top of them.
+Only public noticeboards have UI/routes built. `Circle` and private-board visibility are modelled in the schema and repository but have no UI — see `docs/DECISIONS.md` ("Scope cuts") before building on top of them.
 
 ### Current-user identity
 
-There is no real auth. A "Viewing as [name]" cookie (`viewerName`, set in `src/routes/board/[name]/+page.server.ts`) is matched against `User.name` by exact trimmed-name lookup — the same resolution `resolveAuthor()` uses for import and live posts. This is what lets a `pending_review` author see their own held notice; don't add a different identity mechanism without checking this one first.
+There is no real auth. A "Viewing as [name]" name lives in the browser's `localStorage` (`ViewerBadge.svelte`, shown top-right in `+layout.svelte`), matched against `User.name` by exact trimmed-name lookup — the same resolution `resolveAuthor()` uses for import and live posts. This is what lets a `pending_review` author see their own held notice; don't add a different identity mechanism without checking this one first.
+
+Since the server can't read `localStorage`, `ViewerBadge.svelte` syncs it into a `?viewer=` query param (via client-side `goto`) whenever they're out of sync; `src/routes/+layout.server.ts` reads it from there into `viewerName` for every page's `load`. A `?/action` form target drops the rest of the query string on submit (standard relative-URL resolution), so `createNotice`/`createReply` carry `viewer` forward as a hidden form field, not the URL — see the `redirectTarget()` helper in `src/routes/board/[name]/+page.server.ts` before changing that flow.
 
 ### Forms are plain SvelteKit form actions, deliberately without `use:enhance`
 
