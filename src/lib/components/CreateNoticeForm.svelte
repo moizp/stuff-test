@@ -1,9 +1,10 @@
 <script lang="ts">
-	let { defaultAuthor = '' }: { defaultAuthor?: string } = $props();
+	let { viewerName = '' }: { viewerName?: string } = $props();
 </script>
 
 <form class="paper-form" method="POST" action="?/createNotice">
-	<input type="hidden" name="viewer" value={defaultAuthor} />
+	<input type="hidden" name="author" value={viewerName} />
+	<input type="hidden" name="viewer" value={viewerName} />
 	<label>
 		Type
 		<select name="type">
@@ -23,16 +24,8 @@
 		<textarea name="body" rows="3" required></textarea>
 	</label>
 	<label>
-		Your name
-		<input type="text" name="author" value={defaultAuthor} placeholder="Optional" />
-	</label>
-	<label>
 		Card image URL
 		<input type="url" name="cardImageUrl" placeholder="Optional — pasted image link" />
-	</label>
-	<label>
-		Card caption
-		<input type="text" name="cardCaption" placeholder="Optional — falls back to title" />
 	</label>
 	<label>
 		Card font

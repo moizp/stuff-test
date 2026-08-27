@@ -83,7 +83,6 @@ export const actions = {
 		const body = String(form.get('body') ?? '').trim();
 		const authorName = String(form.get('author') ?? '').trim();
 		const cardImageUrl = String(form.get('cardImageUrl') ?? '').trim();
-		const cardCaption = String(form.get('cardCaption') ?? '').trim();
 		const cardFont = String(form.get('cardFont') ?? '').trim() as CardFont | '';
 
 		if (!title || !body) {
@@ -105,7 +104,6 @@ export const actions = {
 			body,
 			authorId: author?.id ?? null,
 			cardImageUrl: cardImageUrl || null,
-			cardCaption: cardCaption || null,
 			cardFont: cardFont || null
 		});
 

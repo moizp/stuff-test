@@ -64,7 +64,7 @@
 			<img
 				class="mb-3 aspect-4/3 w-full rounded border border-black/15 bg-paper-shadow object-cover"
 				src={notice.cardImageUrl}
-				alt={notice.cardCaption || notice.title}
+				alt={notice.title}
 			/>
 		{/if}
 

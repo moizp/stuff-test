@@ -52,12 +52,12 @@
 		<img
 			class="mb-2.5 aspect-4/3 w-full rounded border border-black/15 bg-paper-shadow object-cover"
 			src={notice.cardImageUrl}
-			alt={notice.cardCaption || notice.title}
+			alt={notice.title}
 			loading="lazy"
 		/>
 	{/if}
 
-	<p class={`mb-1.5 text-lg leading-tight ${fontClass}`}>{notice.cardCaption || notice.title}</p>
+	<p class={`mb-1.5 text-lg leading-tight ${fontClass}`}>{notice.title}</p>
 
 	<p class="text-xs text-ink-soft">
 		{notice.authorName ?? 'Unknown resident'}

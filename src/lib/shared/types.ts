@@ -39,7 +39,6 @@ export interface Notice {
 	status: NoticeStatus;
 	importFlags: string[];
 	cardImageUrl: string | null; // optional, poster-supplied URL — no file upload/blob storage
-	cardCaption: string | null; // short line for the card face; falls back to title if unset
 	cardFont: CardFont | null; // preset display font for the card face; falls back to a default
 }
 

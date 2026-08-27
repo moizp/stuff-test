@@ -12,7 +12,6 @@ export interface CreateNoticeInput {
 	createdAt?: string;
 	importFlags?: string[];
 	cardImageUrl?: string | null;
-	cardCaption?: string | null;
 	cardFont?: CardFont | null;
 }
 
@@ -59,7 +58,6 @@ export async function createNotice(
 		importFlags: [...(input.importFlags ?? []), ...flags],
 		createdAt: input.createdAt,
 		cardImageUrl: input.cardImageUrl ?? null,
-		cardCaption: input.cardCaption ?? null,
 		cardFont: input.cardFont ?? null
 	});
 

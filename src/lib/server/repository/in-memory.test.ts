@@ -13,7 +13,6 @@ function baseNotice(overrides: Partial<NewNotice> & Pick<NewNotice, 'boardId'>):
 		status: 'visible',
 		importFlags: [],
 		cardImageUrl: null,
-		cardCaption: null,
 		cardFont: null,
 		...overrides
 	};

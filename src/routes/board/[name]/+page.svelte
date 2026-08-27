@@ -41,7 +41,7 @@
 	</button>
 {:else}
 	<div id="create-notice-form">
-		<CreateNoticeForm defaultAuthor={data.viewerName} />
+		<CreateNoticeForm viewerName={data.viewerName} />
 	</div>
 {/if}
 
