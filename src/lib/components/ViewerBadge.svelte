@@ -51,12 +51,12 @@
 
 <div class="fixed top-4 right-4 z-10 text-sm">
 	{#if editing}
-		<div class="flex items-center gap-2 rounded-sm bg-board-dark px-3 py-1.5">
+		<div class="flex items-center gap-2 rounded bg-board-dark px-3 py-1.5">
 			<label for="viewer-name-input" class="font-medium text-paper">Your name</label>
 			<input
 				id="viewer-name-input"
 				bind:this={inputEl}
-				class="rounded-sm border border-paper-shadow bg-paper px-2 py-1 text-ink placeholder:text-ink-soft"
+				class="rounded border border-paper-shadow bg-paper px-2 py-1 text-ink placeholder:text-ink-soft"
 				type="text"
 				bind:value={draft}
 				placeholder="e.g. Alex"
@@ -66,7 +66,7 @@
 		</div>
 	{:else}
 		<button
-			class="flex cursor-pointer items-center gap-1.5 rounded-sm border border-paper-shadow bg-board-dark px-3 py-1.5 font-medium text-paper hover:brightness-125"
+			class="flex cursor-pointer items-center gap-1.5 rounded border border-paper-shadow bg-board-dark px-3 py-1.5 font-medium text-paper hover:brightness-125"
 			type="button"
 			onclick={() => {
 				draft = viewerName;

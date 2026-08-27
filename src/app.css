@@ -55,7 +55,7 @@
 	left: -9999px;
 	top: 0;
 	z-index: 50;
-	@apply rounded-sm bg-paper px-4 py-2 font-bold text-ink;
+	@apply rounded bg-paper px-4 py-2 font-bold text-ink;
 
 	&:focus {
 		left: 1rem;
@@ -68,19 +68,19 @@
    ::before pseudo-element markup per instance. */
 @utility pin-card {
 	position: relative;
-	@apply rounded-sm bg-paper p-4 pb-6 shadow-[0_6px_14px_rgb(0_0_0/35%)] transition-transform;
+	@apply rounded bg-paper p-4 pb-6 shadow-[0_6px_14px_rgb(0_0_0/35%)] transition-transform;
 
 	&::before {
 		content: '';
 		position: absolute;
-		top: -10px;
+		top: -11px;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 16px;
-		height: 16px;
+		width: 18px;
+		height: 18px;
 		border-radius: 9999px;
 		background: radial-gradient(circle at 35% 35%, #e0776b, var(--color-pin));
-		box-shadow: 0 2px 3px rgb(0 0 0 / 50%);
+		box-shadow: 0 3px 5px rgb(0 0 0 / 55%);
 		z-index: 2;
 	}
 
@@ -101,7 +101,7 @@
 
 /* Paper-textured form shared by create-notice and reply forms. */
 @utility paper-form {
-	@apply grid gap-2 bg-paper p-5 shadow-[0_6px_14px_rgb(0_0_0/35%)];
+	@apply grid gap-2 rounded bg-paper p-5 shadow-[0_6px_14px_rgb(0_0_0/35%)];
 
 	label {
 		@apply grid gap-1 text-sm text-ink-soft;
@@ -110,10 +110,10 @@
 	input,
 	textarea,
 	select {
-		@apply rounded-sm border border-paper-shadow bg-[#fffdf7] px-2 py-1.5 font-[inherit] text-ink;
+		@apply rounded border border-paper-shadow bg-[#fffdf7] px-2 py-1.5 font-[inherit] text-ink;
 	}
 
 	button {
-		@apply justify-self-start rounded-sm bg-accent px-4 py-2 font-bold text-paper hover:brightness-110;
+		@apply justify-self-start rounded bg-accent px-4 py-2 font-bold text-paper hover:brightness-110;
 	}
 }

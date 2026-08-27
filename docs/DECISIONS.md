@@ -60,6 +60,7 @@ flowchart TB
 ## UI direction
 
 - **Objective**: make the UI simple and seamless enough that posting feels as easy as putting up a sign on a noticeboard — the standard the rest of this section's choices (styling-only board identity, minimal-field forms, no login) are aimed at.
+- A welcoming pass on top of that objective: a warmer home-page tagline ("What's happening in your streets"), a friendlier empty-board message, "Not yet verified" instead of "Unverified resident" (states the same fact without reading like a warning label), and a slightly larger, more consistent corner radius plus a more visible pushpin shadow across cards/buttons/forms — small, low-risk changes, not a redesign.
 - Noticeboard visual identity via styling only — pinned/postcard-style notice cards, corkboard-texture background, warm paper palette, and a thick wood picture-frame border (`page-frame` in `app.css`) around the whole page — in a normal scrollable grid. Not a true interactive pan/zoom canvas: that's real UI engineering (drag physics, hit-testing, accessibility rework) for a feature outside the grading criteria, and fights the "newest first" requirement, which has no natural equivalent in a freeform spatial layout. Full canvas interaction is in "what I'd do with more time." The frame lives once at the layout level rather than nested per-page, so notices sit directly on the textured corkboard background inside it instead of a second, redundant frame.
 - Card face is customizable: poster can set an image and a short caption (custom font) shown on the card; clicking opens the full notice (title, body, author, timestamp, replies).
 - Image is a **pasted URL**, not a file upload — we have no blob storage (in-memory only), and building upload infra isn't justified here.
@@ -162,7 +163,7 @@ TrustEvent {                  // append-only log; trustScore derives from this
   | Verified | Heuristic flags?      | Status           | UI treatment                                           |
   | -------- | --------------------- | ---------------- | ------------------------------------------------------ |
   | true     | —                     | `visible`        | shown normally                                         |
-  | false    | no                    | `visible`        | shown, labelled "Unverified resident"                  |
+  | false    | no                    | `visible`        | shown, labelled "Not yet verified"                     |
   | false    | yes                   | `pending_review` | excluded from public list; author still sees their own |
   | —        | severe (abuse/threat) | `hidden`         | excluded entirely, logged                              |
 
@@ -188,8 +189,10 @@ TrustEvent {                  // append-only log; trustScore derives from this
 - Brand guideline (tone, colour, typography) and a properly designed UI.
 - User personas and UX research to validate the noticeboard/circle/trust-score flows.
 - PWA features (offline support, installability, push notifications).
-- Content-based moderation (e.g. spam/profanity detection) beyond the verified-flag-driven trust & safety rule — the questionable legacy entries were handled via trust score/status, not NLP-based classification.
+- AI-powered content moderation beyond today's regex/keyword pattern-matching (see "Trust & safety") — the questionable legacy entries were caught by simple patterns, not NLP. A small, self-hosted, purpose-fine-tuned LLM is the likely shape: catches more subtle spam/scam phrasing than pattern-matching, avoids per-post cost and data-sharing trade-offs of a third-party AI API, and stays cheap to run at this scale.
 - Scalability work: pagination, indexing, background job queue for moderation — none needed at this data volume, but noted for production.
 - Filters on the notice list (by type, verified/unverified, has-image, etc.) — the brief only asks for newest-first per neighbourhood; filtering would help once a board has more than a screenful of notices.
-- A dedicated alt-text field on the create-notice form (currently the card image's `alt` reuses `cardCaption`/`title`), a full screen-reader walkthrough, and an automated accessibility audit (e.g. axe) — the current pass is manual, against the app's own markup and computed colour contrast.
+- A dedicated alt-text field on the create-notice form (currently the card image's `alt` reuses `cardCaption`/`title`), a full screen-reader walkthrough, and an automated accessibility audit — the current pass is manual, against the app's own markup and computed colour contrast.
+- **Automated accessibility testing gating CI/CD**: Playwright + `@axe-core/playwright` (`AxeBuilder`). A Playwright e2e test visits each key page/state (home, a board list, an open notice dialog) and runs an axe scan against it; the test fails — and so does the build — if axe reports any violation at or above a chosen severity (typically "serious"/"critical", since axe also flags lower-confidence advisory issues not worth hard-failing a build on). Wired as a required check in CI (e.g. a GitHub Actions job running `pnpm exec playwright test`) so an accessibility regression blocks a merge the same way a failing unit test would, rather than depending on someone remembering to check manually.
 - Gamification and badges (e.g. recognizing active/helpful residents) — `TrustEvent`'s append-only log is a natural base for this, but no reward/badge model is designed or built now.
+- Usage tracking/analytics — understanding real user behaviour (which notice types get used, drop-off points in posting/replying, how often the detail dialog is opened) to find where the UI actually needs improvement, rather than guessing. Nothing in scope for this exercise instruments this yet.

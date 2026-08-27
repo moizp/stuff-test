@@ -31,7 +31,7 @@
 
 {#if !showCreateForm}
 	<button
-		class="mb-6 rounded-sm bg-accent px-5 py-2.5 text-[0.95rem] font-bold text-paper hover:brightness-110"
+		class="mb-6 rounded bg-accent px-5 py-2.5 text-[0.95rem] font-bold text-paper hover:brightness-110"
 		type="button"
 		onclick={() => (showCreateForm = true)}
 		aria-expanded={showCreateForm}
@@ -50,7 +50,9 @@
 {/if}
 
 {#if data.notices.length === 0}
-	<p class="p-8 text-center text-paper-shadow">Nothing pinned up here yet — be the first.</p>
+	<p class="p-8 text-center text-paper-shadow">
+		This board's looking a little bare — be the first to pin something up!
+	</p>
 {:else}
 	<div class="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] items-start gap-7">
 		{#each data.notices as notice (notice.id)}

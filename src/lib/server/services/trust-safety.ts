@@ -68,7 +68,7 @@ export interface TrustSafetyResult {
  *   abusive           → hidden (regardless of verified)
  *   verified, clean    → visible
  *   unverified, spam   → pending_review
- *   unverified, clean  → visible (UI labels it "Unverified resident")
+ *   unverified, clean  → visible (UI labels it "Not yet verified")
  */
 export function evaluateTrustAndSafety(input: {
 	title: string;

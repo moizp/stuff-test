@@ -50,7 +50,7 @@
 
 	{#if notice.cardImageUrl}
 		<img
-			class="mb-2.5 aspect-4/3 w-full border border-black/15 bg-paper-shadow object-cover"
+			class="mb-2.5 aspect-4/3 w-full rounded border border-black/15 bg-paper-shadow object-cover"
 			src={notice.cardImageUrl}
 			alt={notice.cardCaption || notice.title}
 			loading="lazy"
@@ -62,9 +62,7 @@
 	<p class="text-xs text-ink-soft">
 		{notice.authorName ?? 'Unknown resident'}
 		{#if notice.authorName && !notice.authorVerified}
-			<span class="ml-1 rounded-sm bg-black/8 px-1.5 py-0.5 text-[0.68rem]"
-				>Unverified resident</span
-			>
+			<span class="ml-1 rounded-sm bg-black/8 px-1.5 py-0.5 text-[0.68rem]">Not yet verified</span>
 		{/if}
 		{#if notice.status === 'pending_review'}
 			<span class="ml-1 rounded-sm bg-[#f0d9a0] px-1.5 py-0.5 text-[0.68rem] text-[#6b4a0f]">

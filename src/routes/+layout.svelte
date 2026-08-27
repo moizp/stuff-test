@@ -5,6 +5,14 @@
 	import type { LayoutProps } from './$types';
 
 	let { data, children }: LayoutProps = $props();
+
+	// Pings the health endpoint once per session (not on every client-side
+	// navigation — $effect only re-runs on reactive changes, and this reads
+	// none) to start waking a sleeping Render free-tier instance early. A
+	// no-op on a warm instance.
+	$effect(() => {
+		fetch('/health').catch(() => {});
+	});
 </script>
 
 <svelte:head>

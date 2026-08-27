@@ -48,7 +48,7 @@
 	bind:this={dialogEl}
 	onclose={onClose}
 	onclick={handleBackdropClick}
-	class="m-auto max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-sm border-none bg-paper p-6 shadow-[0_20px_50px_rgb(0_0_0/50%)] backdrop:bg-black/60"
+	class="m-auto max-h-[85vh] w-full max-w-lg overflow-y-auto rounded border-none bg-paper p-6 shadow-[0_20px_50px_rgb(0_0_0/50%)] backdrop:bg-black/60"
 >
 	{#if notice}
 		<button
@@ -62,7 +62,7 @@
 
 		{#if notice.cardImageUrl}
 			<img
-				class="mb-3 aspect-4/3 w-full border border-black/15 bg-paper-shadow object-cover"
+				class="mb-3 aspect-4/3 w-full rounded border border-black/15 bg-paper-shadow object-cover"
 				src={notice.cardImageUrl}
 				alt={notice.cardCaption || notice.title}
 			/>
@@ -72,8 +72,7 @@
 		<p class="mb-2 text-xs text-ink-soft">
 			{notice.authorName ?? 'Unknown resident'}
 			{#if notice.authorName && !notice.authorVerified}
-				<span class="ml-1 rounded-sm bg-black/8 px-1.5 py-0.5 text-[0.68rem]"
-					>Unverified resident</span
+				<span class="ml-1 rounded-sm bg-black/8 px-1.5 py-0.5 text-[0.68rem]">Not yet verified</span
 				>
 			{/if}
 			{#if notice.status === 'pending_review'}
