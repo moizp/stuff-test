@@ -1,4 +1,4 @@
-# Neighbourhood Noticeboard
+# Neighbourhood Noticeboard Demo
 
 A lightweight community noticeboard — residents post notices, reply to each other, and a legacy data import plus a trust & safety pipeline handle the messier real-world parts. Built with SvelteKit, TypeScript, and Tailwind CSS.
 
