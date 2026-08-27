@@ -25,6 +25,14 @@
 }
 
 @layer base {
+	/* Caveat is only loaded at weight 600 (see app.html) — without this,
+	   text stays at the default 400, that weight was never downloaded, and
+	   the browser silently falls back to the generic `cursive` family,
+	   which varies wildly (or is missing) across OS/browser combos. */
+	.font-handwritten {
+		font-weight: 600;
+	}
+
 	body {
 		@apply min-h-screen text-ink;
 		background-color: var(--color-board);
