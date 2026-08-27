@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: neighbourhood-noticeboard
+    runtime: node
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: node build
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
