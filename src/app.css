@@ -101,7 +101,7 @@
 
 /* Paper-textured form shared by create-notice and reply forms. */
 @utility paper-form {
-	@apply grid gap-2 rounded bg-paper p-5 shadow-[0_6px_14px_rgb(0_0_0/35%)];
+	@apply mb-5 grid gap-2 rounded bg-paper p-5 shadow-[0_6px_14px_rgb(0_0_0/35%)];
 
 	label {
 		@apply grid gap-1 text-sm text-ink-soft;

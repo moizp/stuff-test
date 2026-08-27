@@ -26,7 +26,7 @@
 	<h1 class="mb-1 font-marker text-4xl tracking-wide text-shadow-[0_2px_0_rgb(0_0_0/25%)]">
 		{data.board.name}
 	</h1>
-	<p class="text-paper-shadow">Newest notices first.</p>
+	<p class="text-paper-shadow">(Newest first)</p>
 </header>
 
 {#if !showCreateForm}
