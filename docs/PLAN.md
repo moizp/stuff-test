@@ -63,4 +63,4 @@ Must-do UI first. Deployment and further Circle/private-board work are lower pri
 ### Wrap-up
 
 - [x] Trim `DECISIONS.md` and this file
-- [ ] Final pass: confirm repo runs from a clean clone per README
+- [x] Final pass: confirm repo runs from a clean clone per README — `git clone` → `pnpm install` → `pnpm check`/`pnpm test` (0 errors, 27/27) → `pnpm build` + `node build` (all 5 routes 200) → `pnpm dev` all verified against `origin/main`
