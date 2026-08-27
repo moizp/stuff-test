@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-board: #5c4331;
+	--color-board-dark: #4a3527;
+	--color-paper: #f6ecd9;
+	--color-paper-shadow: #d8c6a0;
+	--color-ink: #3a2f22;
+	--color-ink-soft: #6b5c47;
+	--color-pin: #b5493c;
+	--color-frame: #3a2a1e;
+	/* warn/event chosen darker than the initial mockup shades — verified
+	   >=4.5:1 contrast (WCAG AA) against the text-paper labels they carry;
+	   the originals (#a15c1f, #4a6fa5) measured 4.41:1 and 4.36:1. */
+	--color-accent: #2f6f4e;
+	--color-warn: #8a4d17;
+	--color-event: #3f5f8f;
+	--color-danger: #a13b2f;
+
+	--font-marker: 'Permanent Marker', cursive;
+	--font-typewriter: 'Special Elite', 'Courier New', monospace;
+	--font-handwritten: 'Caveat', cursive;
+	--font-classic: 'Playfair Display', 'Georgia', serif;
+	--font-serif: 'Georgia', 'Times New Roman', serif;
+}
+
+@layer base {
+	body {
+		@apply min-h-screen text-ink;
+		background-color: var(--color-board);
+		background-image:
+			radial-gradient(circle at 20% 20%, rgb(255 255 255 / 4%) 1px, transparent 1px),
+			radial-gradient(circle at 60% 70%, rgb(0 0 0 / 8%) 1px, transparent 1px),
+			radial-gradient(circle at 80% 30%, rgb(255 255 255 / 3%) 1px, transparent 1px);
+		background-size:
+			22px 22px,
+			26px 26px,
+			18px 18px;
+	}
+
+	/* Consistent, visible keyboard-focus indicator across every interactive
+	   element (buttons, links, inputs) rather than relying on each
+	   component's own default. */
+	:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+}
+
+/* Visually hidden except when focused — lets keyboard users skip the
+   fixed-position viewer badge (see ViewerBadge.svelte) straight to the
+   page content. */
+@utility skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 50;
+	@apply rounded-sm bg-paper px-4 py-2 font-bold text-ink;
+
+	&:focus {
+		left: 1rem;
+		top: 1rem;
+	}
+}
+
+/* Pinned postcard-style card: shared box shadow + pushpin decoration used by
+   every notice on the board — kept as one utility rather than repeating the
+   ::before pseudo-element markup per instance. */
+@utility pin-card {
+	position: relative;
+	@apply rounded-sm bg-paper p-4 pb-6 shadow-[0_6px_14px_rgb(0_0_0/35%)] transition-transform;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: -10px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 16px;
+		height: 16px;
+		border-radius: 9999px;
+		background: radial-gradient(circle at 35% 35%, #e0776b, var(--color-pin));
+		box-shadow: 0 2px 3px rgb(0 0 0 / 50%);
+		z-index: 2;
+	}
+
+	&:hover {
+		@apply z-3 scale-[1.015] rotate-0 shadow-[0_10px_20px_rgb(0_0_0/40%)];
+	}
+}
+
+/* The picture-frame border around the whole page — one frame at the layout
+   level, not nested per-page, so the notices sit directly on the textured
+   corkboard body background inside it. */
+@utility page-frame {
+	@apply rounded-md border-[14px] border-frame bg-board-dark;
+	box-shadow:
+		inset 0 0 40px rgb(0 0 0 / 50%),
+		0 12px 30px rgb(0 0 0 / 40%);
+}
+
+/* Paper-textured form shared by create-notice and reply forms. */
+@utility paper-form {
+	@apply grid gap-2 bg-paper p-5 shadow-[0_6px_14px_rgb(0_0_0/35%)];
+
+	label {
+		@apply grid gap-1 text-sm text-ink-soft;
+	}
+
+	input,
+	textarea,
+	select {
+		@apply rounded-sm border border-paper-shadow bg-[#fffdf7] px-2 py-1.5 font-[inherit] text-ink;
+	}
+
+	button {
+		@apply justify-self-start rounded-sm bg-accent px-4 py-2 font-bold text-paper hover:brightness-110;
+	}
+}
