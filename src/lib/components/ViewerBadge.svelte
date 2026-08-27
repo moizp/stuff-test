@@ -8,6 +8,7 @@
 	let { viewerName }: { viewerName: string } = $props();
 
 	let editing = $state(false);
+	// svelte-ignore state_referenced_locally
 	let draft = $state(viewerName);
 	let inputEl: HTMLInputElement | null = $state(null);
 

@@ -8,6 +8,7 @@
 
 	// Defaults open if a create-notice submission just failed validation, so
 	// the error and the form aren't hidden back behind the toggle button.
+	// svelte-ignore state_referenced_locally
 	let showCreateForm = $state(Boolean(form?.error));
 
 	// Single id, not per-card state — only one notice's full detail can be
