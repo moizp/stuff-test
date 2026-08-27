@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Notice, NoticeType, Reply } from '$lib/shared/types';
+	import type { CardFont, Notice, NoticeType, Reply } from '$lib/shared/types';
 
 	type NoticeWithReplies = Notice & {
 		authorName: string | null;
@@ -10,7 +10,18 @@
 	let { notice, onViewDetails }: { notice: NoticeWithReplies; onViewDetails: () => void } =
 		$props();
 
-	let fontClass = $derived(notice.cardFont ? `font-${notice.cardFont}` : 'font-classic');
+	// Literal strings, not `font-${notice.cardFont}` — Tailwind's build-time
+	// scanner only generates CSS for class names it can find as literal text
+	// in source, so a dynamically-built class name silently produces no
+	// styles at all. Same reasoning as ROTATION/TAG_COLOR below.
+	const FONT_CLASS: Record<CardFont, string> = {
+		marker: 'font-marker',
+		typewriter: 'font-typewriter',
+		handwritten: 'font-handwritten',
+		classic: 'font-classic'
+	};
+
+	let fontClass = $derived(notice.cardFont ? FONT_CLASS[notice.cardFont] : 'font-classic');
 
 	const ROTATION: Record<NoticeType, string> = {
 		offer: '-rotate-1.5',
