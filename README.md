@@ -20,7 +20,7 @@ pnpm install
 pnpm dev
 ```
 
-The app boots with an in-memory store, reseeded from `seed-notices.json` via the import pipeline on every start — no database setup needed.
+`pnpm dev` opens the app in your default browser automatically. It boots with an in-memory store, reseeded from `seed-notices.json` via the import pipeline on every start — no database setup needed.
 
 Other useful commands:
 
