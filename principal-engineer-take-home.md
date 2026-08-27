@@ -29,7 +29,7 @@ A backend and a frontend. **Use whatever stack, tools, and hosting you like** �
 2. **List notices** for a given neighbourhood, newest first, showing type, author (where known), and timestamp.
 3. **Create a notice** (type, title, body, author, neighbourhood).
 4. **Reply to a notice**, and show replies beneath it.
-5. **The interesting bit — trust & safety:** notices from *unverified* residents should be handled differently from verified ones. **How** is entirely your call — label them, hold them for review, rate-limit, down-rank, hide, something else. Make a decision, implement *something*, and explain your reasoning. The legacy data contains some questionable entries; use your judgment on those too.
+5. **The interesting bit — trust & safety:** notices from _unverified_ residents should be handled differently from verified ones. **How** is entirely your call — label them, hold them for review, rate-limit, down-rank, hide, something else. Make a decision, implement _something_, and explain your reasoning. The legacy data contains some questionable entries; use your judgment on those too.
 
 **Explicitly not required** (unless you want to): login/auth, deployment, production hardening, exhaustive tests, or a beautiful UI. If you'd add these for production, just tell us in your write-up rather than building them.
 
@@ -47,7 +47,7 @@ This role is AI-augmented by design, so we want to see how you work with these t
    - What you'd do next, or add before production.
    - How you used AI tooling.
 3. **A short summary/presentation of what you built and why it matters, written for a non-technical executive** (imagine our Chief Product Officer reading it).
-3. **A short written answer** (~half a page total) to the scenario below.
+4. **A short written answer** (~half a page total) to the scenario below.
 
 ### Written scenario (~15 minutes — keep it brief)
 
